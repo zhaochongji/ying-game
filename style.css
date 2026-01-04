@@ -1,0 +1,526 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* 方块颜色配置 */
+    --tile-2: #eee4da;
+    --tile-4: #ede0c8;
+    --tile-8: #f2b179;
+    --tile-16: #f59563;
+    --tile-32: #f67c5f;
+    --tile-64: #f65e3b;
+    --tile-128: #edcf72;
+    --tile-256: #edcc61;
+    --tile-512: #edc850;
+    --tile-1024: #edc53f;
+    --tile-2048: #edc22e;
+    --tile-super: #3c3a32;
+    
+    /* 文字颜色 */
+    --text-light: #f9f6f2;
+    --text-dark: #776e65;
+    
+    /* 背景颜色 */
+    --bg-primary: #faf8ef;
+    --bg-secondary: #bbada0;
+    --bg-container: #bbada0;
+    --bg-grid: #cdc1b4;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    color: var(--text-dark);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.title-container {
+    flex: 1;
+}
+
+.game-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 5rem;
+    font-weight: 800;
+    color: #776e65;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    line-height: 0.9;
+    margin-bottom: 5px;
+}
+
+.game-subtitle {
+    font-size: 1.2rem;
+    color: #8f7a66;
+    font-weight: 500;
+}
+
+.scores-container {
+    display: flex;
+    gap: 15px;
+}
+
+.score-box {
+    background: #bbada0;
+    padding: 15px 25px;
+    border-radius: 6px;
+    text-align: center;
+    min-width: 120px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.score-label {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+.score-value {
+    color: white;
+    font-size: 2.5rem;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.game-info {
+    background: rgba(187, 173, 160, 0.1);
+    border-radius: 10px;
+    padding: 15px 20px;
+    margin-bottom: 30px;
+    border-left: 4px solid #8f7a66;
+}
+
+.instructions {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    color: #666;
+}
+
+.instructions i {
+    color: #8f7a66;
+    margin: 0 2px;
+}
+
+.game-container {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.controls {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    min-width: 200px;
+}
+
+.btn {
+    padding: 15px 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn-new-game {
+    background: linear-gradient(135deg, #8f7a66, #a3927e);
+    color: white;
+}
+
+.btn-undo {
+    background: linear-gradient(135deg, #6c757d, #495057);
+    color: white;
+}
+
+.btn-try-again, .btn-keep-playing {
+    background: linear-gradient(135deg, #28a745, #20c997);
+    color: white;
+}
+
+.game-mode {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.mode-btn {
+    flex: 1;
+    padding: 12px 0;
+    background: #d8d4d0;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #776e65;
+}
+
+.mode-btn:hover {
+    background: #c8c2bc;
+}
+
+.mode-btn.active {
+    background: #8f7a66;
+    color: white;
+    box-shadow: 0 4px 8px rgba(143, 122, 102, 0.3);
+}
+
+.grid-container {
+    position: relative;
+    flex: 1;
+    min-width: 300px;
+}
+
+.grid {
+    background-color: var(--bg-grid);
+    border-radius: 10px;
+    padding: 15px;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.grid-cell {
+    background-color: rgba(238, 228, 218, 0.35);
+    border-radius: 6px;
+    float: left;
+    position: relative;
+}
+
+.tile {
+    position: absolute;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 2.2rem;
+    color: var(--text-dark);
+    z-index: 10;
+    transition: all 0.15s ease;
+}
+
+/* 不同数字的方块颜色 */
+.tile-2 { background-color: var(--tile-2); }
+.tile-4 { background-color: var(--tile-4); }
+.tile-8 { background-color: var(--tile-8); color: var(--text-light); }
+.tile-16 { background-color: var(--tile-16); color: var(--text-light); }
+.tile-32 { background-color: var(--tile-32); color: var(--text-light); }
+.tile-64 { background-color: var(--tile-64); color: var(--text-light); }
+.tile-128 { background-color: var(--tile-128); color: var(--text-light); font-size: 1.8rem; }
+.tile-256 { background-color: var(--tile-256); color: var(--text-light); font-size: 1.8rem; }
+.tile-512 { background-color: var(--tile-512); color: var(--text-light); font-size: 1.8rem; }
+.tile-1024 { background-color: var(--tile-1024); color: var(--text-light); font-size: 1.6rem; }
+.tile-2048 { background-color: var(--tile-2048); color: var(--text-light); font-size: 1.6rem; }
+.tile-super { background-color: var(--tile-super); color: var(--text-light); font-size: 1.4rem; }
+
+.game-over-message, .win-message {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.95);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    z-index: 100;
+    text-align: center;
+    padding: 30px;
+    display: none;
+}
+
+.game-over-message h2, .win-message h2 {
+    color: #776e65;
+    font-size: 3rem;
+    margin-bottom: 20px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.win-message h2 {
+    color: #f67c5f;
+}
+
+.game-over-message p, .win-message p {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    color: #666;
+}
+
+.win-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.stats {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 250px;
+}
+
+.stats-box, .how-to-play {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.stats-box h3, .how-to-play h3 {
+    color: #776e65;
+    margin-bottom: 15px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.stats-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed #eee;
+}
+
+.stat-label {
+    color: #666;
+    font-weight: 500;
+}
+
+.stat-value {
+    color: #8f7a66;
+    font-weight: 700;
+    font-size: 1.2rem;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.how-to-play ul {
+    list-style-type: none;
+    padding-left: 5px;
+}
+
+.how-to-play li {
+    margin-bottom: 12px;
+    padding-left: 25px;
+    position: relative;
+    color: #666;
+    line-height: 1.4;
+}
+
+.how-to-play li:before {
+    content: "•";
+    color: #8f7a66;
+    font-size: 1.5rem;
+    position: absolute;
+    left: 0;
+    top: -3px;
+}
+
+.touch-controls {
+    display: none;
+    justify-content: center;
+    margin: 40px 0;
+}
+
+.touch-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.touch-btn {
+    width: 70px;
+    height: 70px;
+    background: rgba(143, 122, 102, 0.8);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 1.8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin: 0 10px;
+    transition: all 0.2s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.touch-btn:active {
+    background: #8f7a66;
+    transform: scale(0.95);
+}
+
+.touch-center {
+    width: 70px;
+    height: 70px;
+}
+
+.footer {
+    text-align: center;
+    padding-top: 30px;
+    border-top: 1px solid #ddd;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.footer a {
+    color: #8f7a66;
+    text-decoration: none;
+    margin-left: 5px;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+.credit {
+    font-size: 0.8rem;
+    color: #888;
+    margin-top: 5px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .game-title {
+        font-size: 4rem;
+    }
+    
+    .scores-container {
+        width: 100%;
+        justify-content: flex-start;
+    }
+    
+    .score-box {
+        min-width: 100px;
+        padding: 12px 20px;
+    }
+    
+    .game-container {
+        flex-direction: column;
+    }
+    
+    .controls {
+        min-width: 100%;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    
+    .btn {
+        flex: 1;
+        min-width: 140px;
+    }
+    
+    .game-mode {
+        width: 100%;
+    }
+    
+    .stats {
+        min-width: 100%;
+    }
+    
+    .touch-controls {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+    
+    .game-title {
+        font-size: 3.5rem;
+    }
+    
+    .score-box {
+        min-width: 90px;
+        padding: 10px 15px;
+    }
+    
+    .score-value {
+        font-size: 2rem;
+    }
+    
+    .tile {
+        font-size: 1.8rem;
+    }
+    
+    .tile-128, .tile-256, .tile-512 {
+        font-size: 1.5rem;
+    }
+    
+    .tile-1024, .tile-2048 {
+        font-size: 1.3rem;
+    }
+    
+    .touch-btn {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+    
+    .touch-center {
+        width: 60px;
+        height: 60px;
+    }
+}

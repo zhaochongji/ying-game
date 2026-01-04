@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2048 - 数字益智游戏</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="title-container">
+                <h1 class="game-title">2048</h1>
+                <p class="game-subtitle">合并相同数字，创造2048！</p>
+            </div>
+            
+            <div class="scores-container">
+                <div class="score-box">
+                    <div class="score-label">分数</div>
+                    <div id="score" class="score-value">0</div>
+                </div>
+                <div class="score-box">
+                    <div class="score-label">最高分</div>
+                    <div id="best-score" class="score-value">0</div>
+                </div>
+            </div>
+        </header>
+
+        <div class="game-info">
+            <p class="instructions">
+                <strong>玩法说明：</strong>使用 <i class="fas fa-arrow-up"></i><i class="fas fa-arrow-down"></i><i class="fas fa-arrow-left"></i><i class="fas fa-arrow-right"></i> 方向键移动方块。当两个相同数字的方块碰撞时，它们会合并成它们的和。每次移动后，会在空白处生成一个新的方块。
+            </p>
+        </div>
+
+        <div class="game-container">
+            <div class="controls">
+                <button id="new-game" class="btn btn-new-game">
+                    <i class="fas fa-plus-circle"></i> 新游戏
+                </button>
+                <button id="undo" class="btn btn-undo" title="撤销上一步">
+                    <i class="fas fa-undo"></i> 撤销
+                </button>
+                <div class="game-mode">
+                    <button id="mode-4x4" class="mode-btn active">4×4</button>
+                    <button id="mode-5x5" class="mode-btn">5×5</button>
+                    <button id="mode-6x6" class="mode-btn">6×6</button>
+                </div>
+            </div>
+
+            <div class="grid-container">
+                <div id="grid" class="grid grid-4x4">
+                    <!-- 游戏网格将通过JavaScript动态生成 -->
+                </div>
+                
+                <div id="game-over" class="game-over-message">
+                    <h2>游戏结束！</h2>
+                    <p>最终得分: <span id="final-score">0</span></p>
+                    <button id="try-again" class="btn btn-try-again">
+                        <i class="fas fa-redo"></i> 再试一次
+                    </button>
+                </div>
+                
+                <div id="win-message" class="win-message">
+                    <h2>恭喜！你赢得了游戏！</h2>
+                    <p>你成功合成了2048！</p>
+                    <div class="win-buttons">
+                        <button id="keep-playing" class="btn btn-keep-playing">
+                            继续挑战更高分
+                        </button>
+                        <button id="new-game-win" class="btn btn-new-game">
+                            新游戏
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats">
+                <div class="stats-box">
+                    <h3><i class="fas fa-chart-line"></i> 游戏统计</h3>
+                    <div class="stats-content">
+                        <div class="stat-item">
+                            <span class="stat-label">移动次数:</span>
+                            <span id="move-count" class="stat-value">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">游戏时间:</span>
+                            <span id="game-time" class="stat-value">00:00</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">最大方块:</span>
+                            <span id="max-tile" class="stat-value">0</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="how-to-play">
+                    <h3><i class="fas fa-lightbulb"></i> 游戏技巧</h3>
+                    <ul>
+                        <li>尽量把最大的数字放在角落</li>
+                        <li>保持一行或一列为相同数字做准备</li>
+                        <li>避免随意移动，要有策略</li>
+                        <li>留出足够的空间给新方块</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="touch-controls">
+            <div class="touch-row">
+                <button id="up" class="touch-btn"><i class="fas fa-arrow-up"></i></button>
+            </div>
+            <div class="touch-row">
+                <button id="left" class="touch-btn"><i class="fas fa-arrow-left"></i></button>
+                <div class="touch-center"></div>
+                <button id="right" class="touch-btn"><i class="fas fa-arrow-right"></i></button>
+            </div>
+            <div class="touch-row">
+                <button id="down" class="touch-btn"><i class="fas fa-arrow-down"></i></button>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>© 2023 2048数字游戏 | 使用HTML5, CSS3和JavaScript开发 | 
+                <a href="https://github.com/yourusername/2048-game" target="_blank">
+                    <i class="fab fa-github"></i> GitHub仓库
+                </a>
+            </p>
+            <p class="credit">游戏灵感来自Gabriele Cirulli的原创2048</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
